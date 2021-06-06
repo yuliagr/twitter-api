@@ -2,9 +2,6 @@
 
 node {
 	stage('checkout') {
-		deleteDir()
-	}
-	stage('checkout') {
 		checkout scm
 	}
 	stage('Clean') {
