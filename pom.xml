@@ -77,7 +77,7 @@
 					</from>
 					<to>
 						<image>
-							registry.hub.docker.com/bnasslahsen/jenkins-repo
+							registry.hub.docker.com/bnasslahsen/devops-repo
 						</image>
 					</to>
 					<container>
