@@ -1,5 +1,5 @@
 spring:
   config:
-    import: application-common.yml
+    import: application.yml
   jpa:
     database: mysql
