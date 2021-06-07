@@ -1,0 +1,12 @@
+version: '2'
+services:
+  devops1-app:
+    image: bnasslahsen/devops-repo:latest
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://devops1-mysql:3306/devops1?useUnicode=true&characterEncoding=utf8&useSSL=false
+    ports:
+      - 8081:8080
+  devops1-mysql:
+    extends:
+      file: mysql.yml
+      service: devops1-mysql
