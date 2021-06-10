@@ -6,7 +6,7 @@ set +a
 
 export KUBECONFIG=$HOME/.kube/config
 
-# OCIR SECRET
+# DOCKER REGISTRY SECRET
 kubectl delete secret "${APP_PREFIX}-registry" --ignore-not-found=true
 kubectl create secret docker-registry "${APP_PREFIX}-registry" --docker-server="${DOCKER_SERVER}" --docker-username="${DOCKER_USERNAME}" --docker-password="${DOCKER_PASSWORD}" --docker-email="badr.nass.lahsen@oracle.com"
 
