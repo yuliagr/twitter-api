@@ -17,7 +17,7 @@ node {
 
 	stage('Package') {
 		withMaven(maven: 'maven') {
-			sh "mvn package"
+			sh "mvn package -DskipTests"
 		}
 	}
 
