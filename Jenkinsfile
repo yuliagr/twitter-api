@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 
-node ('master') {
+node {
+	agent none
 	stage('checkout') {
 		checkout scm
 	}
