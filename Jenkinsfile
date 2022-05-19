@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-node {
+node ('master') {
 	stage('checkout') {
 		checkout scm
 	}
