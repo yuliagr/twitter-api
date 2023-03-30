@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-db-mysql
+  labels:
+    app: test-db-mysql
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-db-mysql
+  template:
+    metadata:
+      labels:
+        app: test-db-mysql
+    spec:
+      containers:
+        - image: mysql:5.7
+          name: test-db-mysql
+          env:
+            - name: MYSQL_DATABASE
+              value: "devops1"
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "yes"
+          ports:
+            - containerPort: 3306
+          readinessProbe:
+            exec:
+              command: ["mysql", "-h", "127.0.0.1", "-uroot", "-p", "-e", "SELECT 1"]
+            initialDelaySeconds: 20
+            timeoutSeconds: 2
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: test-db-mysql
+spec:
+  selector:
+    app: test-db-mysql
+  ports:
+    - port: 3306
+      targetPort: 3306

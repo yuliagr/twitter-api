@@ -1,23 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: APP_PREFIX-service
+  name: twitter-service
 spec:
   selector:
     matchLabels:
-      app: APP_PREFIX-service
-  replicas: 3 # deployment runs 1 pods matching the template
-  template: # create pods using pod definition in this template
+      app: twitter-service
+  replicas: 3
+  template:
     metadata:
       labels:
-        app: APP_PREFIX-service
+        app: twitter-service
     spec:
       containers:
-        - name: APP_PREFIX-service
-          image: DOCKER_SERVER/bnasslahsen/devops-repo
+        - name: twitter-service
+          image: bnasslahsen/devops-repo
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://test-db-mysql.default.svc.cluster.local:3306/devops1?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - name: SPRING_JPA_HIBERNATE_DDL-AUTO
+              value: update
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
@@ -38,18 +45,15 @@ spec:
             preStop:
               exec:
                 command: [ "sh", "-c", "sleep 10" ]
-      imagePullSecrets:
-        - name: APP_PREFIX-registry
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: APP_PREFIX-service
+  name: twitter-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
-    - port: 80
-      name: http
-      targetPort: 8080
+    - port: 8080
+      nodePort: 32087
   selector:
-    app: APP_PREFIX-service
+    app: twitter-service
