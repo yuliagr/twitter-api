@@ -1,0 +1,9 @@
+node {
+  stage('Deploy to k8s') {
+    withKubeCredentials([
+        [credentialsId: 'kube-aks', contextName: 'bnl-aks']
+    ]) {
+      sh 'src/main/deployment/deploy-app.sh'
+    }
+  }
+}
