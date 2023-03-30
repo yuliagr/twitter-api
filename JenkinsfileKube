@@ -6,6 +6,7 @@ node {
     withKubeCredentials([
         [credentialsId: 'kube-aks', contextName: 'bnl-aks']
     ]) {
+      sh 'chmod +x src/main/deployment/deploy-app.sh'
       sh 'src/main/deployment/deploy-app.sh'
     }
   }
