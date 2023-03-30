@@ -1,4 +1,7 @@
 node {
+  stage('checkout') {
+	checkout scm
+  }
   stage('Deploy to k8s') {
     withKubeCredentials([
         [credentialsId: 'kube-aks', contextName: 'bnl-aks']
