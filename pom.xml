@@ -89,9 +89,7 @@
 						<image>openjdk:8-jre-slim</image>
 					</from>
 					<to>
-						<image>
-							registry.hub.docker.com/iuliiag/devops-repo
-						</image>
+						<image>registry.hub.docker.com/iuliiag/devops-repo</image>
 					</to>
 					<container>
 						<jvmFlags>
